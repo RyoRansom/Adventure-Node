@@ -1,0 +1,66 @@
+######
+# TREENODE CLASS
+######
+class TreeNode:
+  
+  def __init__(self, story_piece):
+    self.story_piece = story_piece
+    self.choices = []
+    
+  def add_child(self, node):
+    self.choices.append(node)
+    
+  def traverse(self):
+    story_node = self
+    print(story_node.story_piece)
+    while len(story_node.choices) > 0:
+      choice = input("Choose 1 or 2 to continue: ")
+      if choice not in ["1", '2']:
+        print("Choose 1 or 2")
+      else:
+        chosen_index = int(choice)
+        chosen_index -= 1
+        chosen_child = story_node.choices[chosen_index]
+        print(chosen_child.story_piece)
+        story_node = chosen_child
+######
+# VARIABLES FOR TREE
+######
+
+story_root = TreeNode("""Scientists have discovered a some animals have a mutated gene causing them to act more agressive with great skill and percision. You don't know how this could've happened but now the crows outside your house are pecking at your windows and breaking in...
+The next thing you do is...
+1 ) Find a weapon and start swinging
+2 ) Gather family in the basement
+""")
+user_choice = input("What is your name? ")
+print(user_choice)
+choice_a = TreeNode("""You swing bravely and blindly. The murder caws so loudly that it makes it impossible to hit any of the birds. The birds continue to peck and scratch and claw your family. All the lights in your house are now broken and an electric spark from the lamp startles the birds and they flee. But not before leaving everyone badly hurt. You stop to catch your breathe and check on your family. 
+Time to decide what to do next.
+1 ) Get in the car with everyone and make way to police
+2 ) Repair the damage to the house and block all entrances to the house""")
+
+choice_b = TreeNode("""You were able to get the family into the basement at the last second with only a few scrathes. You hudle up as you hear the murder upstairs knocking things over and glass breaking. While they persist on pushing on the door, after a minute, they retreat. Unsure if it's safe to come out, you peek your head out to find major damage to the house but atleast no one is hurt. You want to check in with those close to you to see if they had any problems...
+You take out your phone and call...
+1 ) Your family
+2 ) Your best friend""")
+story_root.add_child(choice_a)
+story_root.add_child(choice_b)
+
+choice_a_1 = TreeNode("""You make your way to the car with only the most essential items. Driving down the street, there are cars abandoned everywhere and fires breaking out. People are running everywhere and rampant animals have taken over the city. As you turn into Main street, you pause. There in front of you stands rhinos, hippos, and elephants. Here they come...""")
+
+choice_a_2 = TreeNode("""The house is seealed up. You bandage everyone up and take a minute to gather your thoughts. Scrambling for answers, you get a text from your crazy older brother, that you know is a huge weapons buff. 'Don't worry, I'll be there a minute.''""")
+
+choice_a.add_child(choice_a_1)
+choice_a.add_child(choice_a_2)
+
+choice_b_1 = TreeNode("""Your dad answers the phone. He is happy to hear you are ok. Sounding hopeful, his voice sounds more grim when you ask about everyone else. Your Mother has been attacked and didnt make it. He did everything he could. This news makes you promise that you will go save your dad. Running outside, a pack of dogs is waiting for you. Better run...""")
+
+choice_b_2 = TreeNode("""Your best friend said they were hit by cats and bats. They were able to escape and have since rounded up some of your other close friends in an RV. They will pull up in a few...""")
+
+choice_b.add_child(choice_b_1)
+choice_b.add_child(choice_b_2)
+######
+# TESTING AREA
+######
+print("The year is 2100...")
+story_root.traverse()
